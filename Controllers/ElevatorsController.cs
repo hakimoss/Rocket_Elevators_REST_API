@@ -24,7 +24,7 @@ namespace FactIntervention.Controllers
         [HttpGet("offline")]
         public async Task<ActionResult<IEnumerable<Elevator>>> GetElevators()
         {
-           var offline = await _context.elevators.Where(e => e.Status.Equals("Intervention") || e.Status.Equals("Inactive")).ToListAsync();
+           var offline = await _context.elevators.Where(e => e.Status.Equals("Intervention") && e.Status.Equals("Inactive")).ToListAsync();
             return offline;
         }
 
