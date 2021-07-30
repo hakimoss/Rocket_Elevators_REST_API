@@ -117,7 +117,7 @@ namespace FactIntervention.Controllers
 
         private bool LeadExists(long id)
         {
-            return _context.leads.Any(e => e.Id == id);
+            return _context.leads.Any(e => e.id == id);
         }
     }
 }

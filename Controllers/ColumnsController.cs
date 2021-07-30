@@ -26,20 +26,47 @@ namespace FactIntervention.Controllers
         // {
         //     return await _context.columns.ToListAsync();
         // }
-
-        // GET: api/Columns/(id)
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Column>> GetColumn(long id)
+        [HttpGet("{BatteryID}")]
+        public async Task<ActionResult<IEnumerable<Column>>> Building(long BatteryID)
         {
-            var column = await _context.columns.FindAsync(id);
+            var customer = await _context.columns.Where(b => b.battery_id == BatteryID).ToListAsync(); 
 
-            if (column == null)
+            if (customer == null)
             {
                 return NotFound();
             }
 
-            return Content("The status of this Column is currently:" + column.Status);
+            return customer;
         }
+        [HttpGet("{email}/column")]
+        public IEnumerable<Column> ColumnCostumer([FromRoute] string email)
+        {
+            var customer_ = _context.customers.Where(c => c.email_of_the_company_contact.Equals(email));
+            Customer customer = customer_.FirstOrDefault();      
+
+            IEnumerable<Column> Col =
+            (from column in _context.columns join batteries in _context.batteries on column.battery_id equals batteries.Id 
+            join building in _context.buildings on batteries.Id equals building.Id
+             where building.customer_Id == customer.Id  orderby batteries.created_at select column).Take(5);
+
+            return Col.Distinct().ToList();
+
+        }
+        
+
+        // GET: api/Columns/(id)
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Column>> GetColumn(long id)
+        // {
+        //     var column = await _context.columns.FindAsync(id);
+
+        //     if (column == null)
+        //     {
+        //         return NotFound();
+        //     }
+
+        //     return Content("The status of this Column is currently:" + column.Status);
+        // }
 
         // PUT: api/Columns/5    //Put Request must be the full body, not just the update
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
