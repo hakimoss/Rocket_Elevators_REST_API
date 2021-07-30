@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 public class Lead
 {
-    public long Id { get; set; }
+    public long id { get; set; }
     public string email { get; set; }
     public DateTime created_at { get; set; }
 }

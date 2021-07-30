@@ -30,6 +30,13 @@ namespace FactIntervention
             services.AddDbContext<FactInterventionContext>(options =>
             options.UseMySQL(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +47,7 @@ namespace FactIntervention
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("MyPolicy");
             app.UseHttpsRedirection();
 
             app.UseRouting();

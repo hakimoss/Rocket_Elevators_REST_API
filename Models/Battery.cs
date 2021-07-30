@@ -4,11 +4,24 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
-public class Battery
+
+namespace FactInterventionApi.Models
 {
-    [Key]
-    public long Id { get; set; }
-    public string Status { get; set; }
-    public long Building_Id { get; set; }
-   
-}
+    public partial class Battery
+    {
+        [Key]
+        public long Id { get; set; }
+        public string status { get; set; }
+        public long building_id { get; set; }
+        public string battery_type { get; set; }
+        public string date_of_commissioning { get; set; }
+        public string date_of_last_inspection { get; set; }
+        public string certificate_of_operations { get; set; }
+        public string information { get; set; }
+        public string notes { get; set; }
+        public string created_at {get; set;}
+        [System.Text.Json.Serialization.JsonIgnore]
+        public  Building Building { get; set;}
+        public virtual ICollection<Column> Columns { get; set;}
+    }
+}        
