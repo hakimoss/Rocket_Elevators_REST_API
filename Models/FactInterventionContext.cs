@@ -73,6 +73,8 @@ namespace FactInterventionApi.Models
         public DbSet<Lead> leads { get; set; }
         public DbSet<Customer> customers { get; set; }
         public DbSet<Intervention> interventions { get; set; }
+        public DbSet<Employee> employees { get; set; }
+        public DbSet<Users> users { get; set; }
 
     }
 }

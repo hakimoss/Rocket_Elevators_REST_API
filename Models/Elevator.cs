@@ -11,14 +11,14 @@ namespace FactInterventionApi.Models
         [Key]
         public long Id { get; set; }
         public string Status { get; set; }
-        public string serial_number { get; set; }
-        public string model { get; set; }
-        public string elevator_type { get; set; }
-        public string date_of_commissioning { get; set; }
-        public string date_of_last_inspection { get; set; }
-        public string certificate_of_inspection { get; set; }
-        public string information { get; set; }
-        public string notes { get; set; }
+        public string SerialNumber { get; set; }
+        public string Model { get; set; }
+        public string ElevatorType { get; set; }
+        public string DateOfCommissioning { get; set; }
+        public string DateOfLastInspection { get; set; }
+        public string CertificateOfInspection { get; set; }
+        public string Info { get; set; }
+        public string Notes { get; set; }
         public long column_id { get; set; }
         
         [System.Text.Json.Serialization.JsonIgnore]

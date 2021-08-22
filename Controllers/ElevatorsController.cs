@@ -20,13 +20,19 @@ namespace FactIntervention.Controllers
             _context = context;
         }
 
-        // GET: api/Elevators
+        // GET: api/Elevatorsz
         [HttpGet("offline")]
         public async Task<ActionResult<IEnumerable<Elevator>>> GetElevators()
         {
            var offline = await _context.elevators.Where(e => e.Status.Equals("Intervention") || e.Status.Equals("Inactive")).ToListAsync();
             return offline;
         }
+        // [HttpGet("offline")]
+        // public async Task<ActionResult<IEnumerable<Elevator>>> GetElevators()
+        // {
+        //    var offline = await _context.elevators.Where(e => e.Status.Equals("Intervention") || e.Status.Equals("Inactive")).ToListAsync();
+        //     return offline;
+        // }
 
         // GET: api/Elevators/5
         // [HttpGet("{id}")]
@@ -53,6 +59,7 @@ namespace FactIntervention.Controllers
 
             return customer;
         }
+        
         [HttpGet("{email}/elevator")]
         public IEnumerable<Elevator> ElevatorCostumer([FromRoute] string email)
         {
